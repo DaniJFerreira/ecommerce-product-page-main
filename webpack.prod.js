@@ -21,7 +21,7 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[content.hash].css" }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/template.html",
