@@ -43,7 +43,12 @@ module.exports = merge(common, {
         ]
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: './dist',
+    historyApiFallback: true,
+    hot: true
+  },
 });
 
 
