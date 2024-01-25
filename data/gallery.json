@@ -4,30 +4,30 @@
     "gallery_prod_01":[
     {
       "id": "Main-image",
-      "src": "../assets/image-product-1.jpg",
+      "src": "../../src/assets/image-product-1.jpg",
       "alt": "Main Image"
     },
     {
       "id": "Image-one",
-      "src": "../assets/image-product-1.jpg",
+      "src": "../../src/assets/image-product-1.jpg",
       "className":"grid-image",
       "alt": "Image One"
     },
     {
       "id": "Image-two",
-      "src": "../assets/image-product-2.jpg",
+      "src": "../../src/assets/image-product-2.jpg",
       "className":"grid-image",
       "alt": "Image Two"
     },
     {
       "id":"Image-three",
-      "src": "../assets/image-product-3.jpg",
+      "src": "../../src/assets/image-product-3.jpg",
       "className":"grid-image",
       "alt": "Image Three"
     },
     {
       "id":"Image-four",
-      "src": "../assets/image-product-4.jpg",
+      "src": "../../src/assets/image-product-4.jpg",
       "className":"grid-image",
       "alt": "Image four"
     }
