@@ -1,5 +1,3 @@
-
-
 let listProductHTML = document.querySelector('.div-16');
 let listCartHTML = document.querySelector('.listCart');
 let iconCart = document.querySelector('.icon-cart');
