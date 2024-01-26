@@ -1,15 +1,14 @@
 import imageJason from "../../../data/gallery.json";
 
 export function Gallery() {
+
   let currentIndex = 0;
   let images = imageJason.gallery_prod_01;
-  let currentImageElement = null;
+  let currentImageElement = 0;
 
   const galleryElement = document.getElementById("gallery");
   const modal = document.getElementById("modal");
   const featuredImage = document.querySelector(".featured-image");
-
-  createGalleryItems(images);
 
   function createGalleryItems(images) {
     images.forEach((image, index) => {
@@ -19,7 +18,6 @@ export function Gallery() {
       imgElem.alt = image.alt;
       imgElem.className = `${image.className} grid-image`;
       imgElem.setAttribute("data-index", index);
-      galleryElement.appendChild(imgElem);
 
       imgElem.addEventListener("click", function () {
         if (imgElem.id === "Main-image") {
@@ -29,6 +27,7 @@ export function Gallery() {
         }
         updateImageOpacity(imgElem);
       });
+      galleryElement.appendChild(imgElem);
     });
   }
 
@@ -113,4 +112,6 @@ export function Gallery() {
       // updateImageOpacity(currentImageElement)
     }
   };
+
+  createGalleryItems(images);
 }

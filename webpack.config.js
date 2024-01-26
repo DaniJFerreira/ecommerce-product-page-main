@@ -50,7 +50,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: "asset",
+        type: "asset/resource",
+        generator: {
+          filename: 'assets/[name][ext]', 
+        },
       },
       {
         test: /\.scss$/,
@@ -69,16 +72,34 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
+            presets: ["@babel/preset-env"],
             cacheDirectory: true,
           }
         },
       },
+      // {
+      //   test: /\.json$/i,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'data/[name][ext]', 
+      //   },
+      // },
     ],
   },
-  devtool: false,
+  // devtool: false,
+  // devServer: {
+  //   contentBase: './dist',
+  //   hot: true,
+  // },
+  // Configuration for development server
   devServer: {
-    contentBase: './dist',
-    hot: true,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 3000,
   },
+  // This could be 'source-map' or another option to help with debugging.
+  devtool: 'eval-source-map',
 };
 
