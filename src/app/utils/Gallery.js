@@ -1,6 +1,6 @@
 import imageJason from "../../../data/gallery.json";
 
-export function Gallery() {
+export async function Gallery() {
 
   let currentIndex = 0;
   let images = imageJason.gallery_prod_01;

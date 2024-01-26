@@ -6,7 +6,7 @@ let iconCartSpan = document.querySelector(".icon-cart span");
 let products = [];
 let cart = [];
 
-export function showCart() {
+export async function showCart() {
   function handleClickOnPage(event) {
     // Check if the click was on the iconCart or a child of iconCart
     if (iconCart.contains(event.target)) {
