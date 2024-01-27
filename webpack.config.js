@@ -77,13 +77,13 @@ module.exports = {
           }
         },
       },
-      // {
-      //   test: /\.json$/i,
-      //   type: 'asset',
-      //   generator: {
-      //     filename: 'data/[name][ext]', 
-      //   },
-      // },
+      {
+        test: /\.json$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'data/[name][ext]',  
+        },
+      },
     ],
   },
   // devtool: false,

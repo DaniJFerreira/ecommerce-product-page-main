@@ -1,4 +1,4 @@
-// import productsJson from "../../../data/products.json";
+import productsJson from "../../../data/products.json";
 
 let listProductHTML = document.querySelector(".div-16");
 let listCartHTML = document.querySelector(".listCart");
@@ -280,7 +280,7 @@ export async function showCart() {
 
   const initApp = () => {
 
-    fetch('../../../data/products.json')
+    fetch(productsJson)
       .then((response) => response.json())
       .then((data) => {
         products = data;
@@ -295,6 +295,7 @@ export async function showCart() {
   };
   console.log(products);
   initApp();
+}
 
 //   async function initApp() {
 //   const response = await fetch(productsJson);
@@ -310,7 +311,7 @@ export async function showCart() {
 //   }
 //  }
 //  initApp();
-}
+// }
 
 
 

@@ -3,16 +3,19 @@ import imageJson from "../../../data/gallery.json";
 export function Gallery() {
 
   let currentIndex = null;
-  // let images = imageJson;
+  // let images = imageJson.gallery_prod_01;
   let currentImageElement = null;
 
   const galleryElement = document.getElementById("gallery");
   const modal = document.getElementById("modal");
   const featuredImage = document.querySelector(".featured-image");
 
-  let images = Array.isArray(imageJson) ? imageJson : [];
+  let images = Array.isArray(imageJson.gallery_prod_01) ? imageJson.gallery_prod_01 : [];
+
+  console.log(imageJson);
 
   function createGalleryItems(images) {
+
     images.forEach((image, index) => {
       let imgElem = document.createElement("img");
       imgElem.src = image.src;
@@ -29,6 +32,7 @@ export function Gallery() {
         }
         updateImageOpacity(imgElem);
       });
+     
       galleryElement.appendChild(imgElem);
     });
   }
