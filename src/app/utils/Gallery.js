@@ -1,14 +1,16 @@
-import imageJason from "../../../data/gallery.json";
+import imageJson from "../../../data/gallery.json";
 
-export async function Gallery() {
+export function Gallery() {
 
-  let currentIndex = 0;
-  let images = imageJason.gallery_prod_01;
-  let currentImageElement = 0;
+  let currentIndex = null;
+  // let images = imageJson;
+  let currentImageElement = null;
 
   const galleryElement = document.getElementById("gallery");
   const modal = document.getElementById("modal");
   const featuredImage = document.querySelector(".featured-image");
+
+  let images = Array.isArray(imageJson) ? imageJson : [];
 
   function createGalleryItems(images) {
     images.forEach((image, index) => {
@@ -115,3 +117,5 @@ export async function Gallery() {
 
   createGalleryItems(images);
 }
+
+

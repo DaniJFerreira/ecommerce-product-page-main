@@ -1,7 +1,5 @@
 
-
-{
-    "gallery_prod_01":[
+[
     {
       "id": "Main-image",
       "src": "../../src/assets/image-product-1.jpg",
@@ -31,5 +29,4 @@
       "className":"grid-image",
       "alt": "Image four"
     }
-  ]
-}
+]
