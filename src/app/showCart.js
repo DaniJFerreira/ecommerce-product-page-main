@@ -5,305 +5,230 @@ import plus from "../assets/icon-plus.svg";
 import minus from "../assets/icon-minus.svg";
 import deleteCart from "../assets/icon-delete.svg";
 
-let listProductHTML = document.querySelector(".div-16");
-let listCartHTML = document.querySelector(".listCart");
-let iconCart = document.querySelector(".icon-cart");
-let openCart = document.getElementById("cartTab");
-let iconCartSpan = document.querySelector(".icon-cart span");
+// Bundle the asset imports to reduce clutter and improve maintainability
+
+const assets = {
+  image: require('../assets/image-product-1-thumbnail.jpg'),
+  icons: require('../assets/icon-addcart.svg'),
+  plus: require('../assets/icon-plus.svg'),
+  minus: require('../assets/icon-minus.svg'),
+  deleteCart: require('../assets/icon-delete.svg')
+};
+
+// Simplify selector retrieval using a helper function
+const select = (selector) => document.querySelector(selector);
+
+// Select DOM elements once and reuse them
+const listProductHTML = select(".div-16");
+const listCartHTML = select(".listCart");
+const iconCart = select(".icon-cart");
+const openCart = select("#cartTab");
+const iconCartSpan = select(".icon-cart span");
+
 let products = [];
 let cart = [];
 
 export function showCart() {
-  function handleClickOnPage(event) {
-    // Check if the click was on the iconCart or a child of iconCart
-    if (iconCart.contains(event.target)) {
-      // Toggle the 'hidden' class of openCart when iconCart is clicked
-      openCart.classList.toggle("hidden");
-      openCart.classList.toggle("cartAnim");
-    } else if (
-      !openCart.contains(event.target) &&
-      listCartHTML.contains(event.target) && // Add this condition to check for clicks inside the listCart
-      !openCart.classList.contains("hidden")
-    ) {
-      // Hide openCart by adding the 'hidden' class only if the click was outside openCart and it is not already hidden
-      openCart.classList.add("hidden");
-    }
+// Debounce function to prevent excessive calls for simultaneous clicks
+const debounce = (func, delay) => {
+  let inDebounce;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+const handleClickOnPage = debounce((event) => {
+  if (iconCart.contains(event.target)) {
+    openCart.classList.toggle("hidden");
+    openCart.classList.toggle("cartAnim");
+  } else if (
+    !openCart.contains(event.target) &&
+    listCartHTML.contains(event.target) && 
+    !openCart.classList.contains("hidden")
+  ) {
+    openCart.classList.add("hidden");
+  }
+}, 250); // Wait for 250ms before processing the click
+
+window.addEventListener("click", handleClickOnPage);
+
+// Added functions to better organize code
+const findProductById = (id) =>
+  products.find((product) => product.id.toString() === id.toString());
+
+const updateQuantityDisplay = (quantityElement, quantity) => {
+  quantityElement.textContent = quantity.toString();
+};
+
+const addItemToDom = (product) => {
+  const newProduct = document.createElement("div");
+  newProduct.dataset.id = product.id;
+  newProduct.classList.add("item");
+  newProduct.innerHTML = `
+          <div class="div-17">${product.title}</div>
+          <div class="div-18">${product.name}</div>
+          <div class="div-19">
+            ${product.description}
+          </div>
+          <div class="discount">
+              <ul class="div-20">
+               <li class="div-21">$${product.price}</li>  
+               <li class="div-22">${product.discount_50}%</li>
+              </ul>
+             <div class="div-23">$250.00</div>
+          </div>
+          <div class="div-24">
+            <div class="div-25">
+              <img src="${assets.minus}" loading="lazy" class="minus" />
+              <span>0</span>
+              <img src="${assets.plus}" loading="lazy" class="plus" />
+            </div>
+            <button class="addtoCart">
+              <img src="${assets.icons}" loading="lazy" class="img-11" />
+              <h1>Add to cart</h1>
+            </button>
+            </di>`;
+  listProductHTML.appendChild(newProduct);
+};
+
+const addToCart = (productId) => {
+  const product = findProductById(productId);
+  if (!product || product.quantity < 1) {
+    console.error("Cannot add to cart: Product is undefined or quantity is less than 1");
+    return;
   }
 
-  // Attach the event listener to the window object
-  window.addEventListener("click", handleClickOnPage);
+  let cartItem = cart.find((item) => item.product_id === productId);
+  if (cartItem) {
+    cartItem.quantity += product.quantity;
+  } else {
+    cart.push({ product_id: productId, quantity: product.quantity });
+  }
 
-  const addDataToHTML = (products) => {
+  product.quantity = 1;
+  updateCartUI();
+  updateLocalStorage();
+};
 
-    // Clears existing products if necessary
-    listProductHTML.innerHTML = "";
-    products.quantity = 0;
+listProductHTML.addEventListener("click", (event) => {
+  const targetElement = event.target;
+  if (targetElement.classList.contains("plus") || targetElement.classList.contains("minus")) {
+    const productElement = targetElement.closest(".item");
+    const productId = productElement.dataset.id;
+    const product = findProductById(productId);
+    const quantityElement = productElement.querySelector(".div-25 span");
+    let currentQuantity = parseInt(quantityElement.textContent, 10);
 
-    if (products.length >= 0) {
-      products.forEach((product) => {
-        let newProduct = document.createElement("div");
-        newProduct.dataset.id = product.id;
-        newProduct.classList.add("item");
-        newProduct.innerHTML = `
-                <div class="div-17">${product.title}</div>
-
-                <div class="div-18">${product.name}</div>
-                <div class="div-19">
-                  ${product.description}
-                </div>
-                <div class="discount">
-                    <ul class="div-20">
-                     <li class="div-21">$${product.price}</li>  
-                     <li class="div-22">${product.discout_50}%</li>
-                    </ul>
-                   <div class="div-23">$250.00</div>
-                </div>
-                <div class="div-24">
-                  <div class="div-25">
-                    <img
-                      loading="lazy"
-                      src="${minus}"
-                      class="minus"
-                    />
-                    <span>0</span>
-                    <img
-                      loading="lazy"
-                      src="${plus}"
-                      class="plus"
-                    />
-                  </div>
-                  <button class="addtoCart">
-                    <img
-                      loading="lazy"
-                      src="${icons}"
-                      class="img-11"
-                    />
-                    <h1>Add to cart</h1>
-                  </button>
-                  </di>`;
-
-        // Append the new product after setting innerHTML
-        listProductHTML.appendChild(newProduct);
-      });
+    if (targetElement.classList.contains("plus")) {
+      currentQuantity++;
+    } else if (currentQuantity > 1) { 
+      currentQuantity--;
     }
-  };
 
-  const findProductById = (id) =>
-    products.find((product) => product.id.toString() === id.toString());
+    updateQuantityDisplay(quantityElement, currentQuantity);
+    product.quantity = currentQuantity;
+  }
+});
 
-  // Handle quantity change in product list
-  listProductHTML.addEventListener("click", (event) => {
-    let targetElement = event.target;
-    if (
-      targetElement.classList.contains("plus") ||
-      targetElement.classList.contains("minus")
-    ) {
-      // Get the closest .item parent which contains the data-id attribute
-      let productElement = targetElement.closest(".item");
+listProductHTML.addEventListener("click", (event) => {
+  const addToCartButton = event.target.closest(".addtoCart");
+  if (addToCartButton) {
+    const productElement = addToCartButton.closest(".item");
+    addToCart(productElement.dataset.id);
+  }
+});
 
-      let productId = productElement.dataset.id;
-      let product = findProductById(productId);
+const updateLocalStorage = () => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
 
-      let quantityElement = productElement.querySelector(".div-25 span");
-      let currentQuantity = parseInt(quantityElement.textContent, 0);
+const updateCartUI = () => {
+  listCartHTML.innerHTML = "";
 
-      if (targetElement.classList.contains("plus")) {
-        currentQuantity += 1;
-      } else if (
-        currentQuantity > 1 &&
-        targetElement.classList.contains("minus")
-      ) {
-        // Prevent decreasing below 1
-        currentQuantity -= 1;
-      }
+  let totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
-      // Update the quantity in the DOM
-      quantityElement.textContent = currentQuantity.toString();
-
-      // Update the quantity in the products array
-      product.quantity = currentQuantity;
-    }
-  });
-
-  // Function to add an item to the cart
-  const addToCart = (productId) => {
-    let product = findProductById(productId);
-
-    // Check if the quantity is sufficient
-    if (product.quantity < 1) {
-      console.error("Cannot add to cart: Product quantity is less than 1");
+  if (cart.length > 0) {
+  cart.forEach((item) => {
+    const product = findProductById(item.product_id);
+    if (!product) {
+      console.error(`Product with ID ${item.product_id} not found.`);
       return;
     }
-
-    let cartItemIndex = cart.findIndex((item) => item.product_id === productId);
-
-    if (cartItemIndex > -1) {
-      // If the product already exists in the cart, just update the quantity
-      cart[cartItemIndex].quantity += product.quantity;
-    } else {
-      // Else, add a new product to the cart with its quantity
-      cart.push({
-        product_id: productId,
-        quantity: product.quantity,
-      });
-    }
-
-    // Reset the product quantity to 1 for future additions
-    product.quantity = 1;
-
-    // Update the cart UI
-    addCartToHTML();
-    // Update the local storage
-    addCartToMemory();
-
-    // Update the product list quantity display
-    let productElement = listProductHTML.querySelector(
-      `.item[data-id="${productId}"]`
-    );
-    if (productElement) {
-      let quantityElement = productElement.querySelector(".div-25 span");
-      quantityElement.textContent = "1";
-    }
-  };
-
-  // Add event listener for the 'Add to Cart' button in the product list
-  listProductHTML.addEventListener("click", (event) => {
-    let positionClick = event.target;
-
-    // Ensure we get the .addtoCart button even if the image or <h1> inside it is clicked
-    let addToCartButton = positionClick.closest(".addtoCart");
-
-    if (addToCartButton) {
-      // Traverse up to the parent '.item' to get the dataset id
-      let productElement = addToCartButton.closest(".item");
-      
-      let productId = productElement.dataset.id;
-      addToCart(productId);
-    }
-  });
-
-  const addCartToMemory = () => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
-
-  const addCartToHTML = () => {
-    listCartHTML.innerHTML = "";
-
-    let totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-
-    if (cart.length > 0) {
-      cart.forEach((item) => {
-        let product = products.find((p) => p.id == item.product_id);
-
-        // Safeguard against undefined products
-        if (!product) {
-          console.error(`Product with ID ${item.product_id} not found.`);
-          return; // Continue to the next iteration
-        }
-
-        let newItemHTML = `
-                <div class="item" data-id="${item.product_id}">
-                    <div class="image">
-                        <img src="${
-                          image ?? "default-placeholder.png"
-                        }">
-                    </div>
-                    <div class="name">${product.name}</div>
-                    <div class="price">$${product.price}</div>
-                    <div class="quantity">
-                    <span>x${item.quantity}</span>
+    
+    const newItemHTML = `
+        <div class="item" data-id="${item.product_id}">
+         <div class="image">
+            <img src="${
+              assets.image ?? "default-placeholder.png"
+              }">
+             </div>
+             <div class="name">${product.name}</div>
+                <div class="price">$${product.price}</div>
+                <div class="quantity">
+                  <span>x${item.quantity}</span>
                 </div>
-                    <div class="totalPrice"><p>$${(
-                      product.price * item.quantity
-                    ).toFixed(2)}</p></div>
-                 
-                        <span class="minus"><img src="${
-                          deleteCart ?? "default-placeholder.png"
-                        }"></span>
-            
-                </div>`;
-        listCartHTML.insertAdjacentHTML("beforeend", newItemHTML);
-        console.log(products);
-      });
-    } else {
-      listCartHTML.innerHTML = "<p>Your cart is empty.</p>"; // Show a message when cart is empty
-    }
-    if (totalQuantity === 0) {
-      iconCartSpan.classList.add("hidden");
-    } else {
-      iconCartSpan.classList.remove("hidden");
-      iconCartSpan.textContent = totalQuantity.toString();
-    }
-  };
-
-  listCartHTML.addEventListener("click", (event) => {
-    let product_id = event.target.closest(".item")?.dataset.id;
-    if (!product_id) return;
-
-    let type = event.target.classList.contains("plus") ? "plus" : "minus";
-    changeQuantityCart(product_id, type);
+                  <div class="totalPrice"><p>$${(
+                    product.price * item.quantity
+                  ).toFixed(2)}</p></div>
+          
+                 <span class="minus"><img src="${
+                   assets.deleteCart ?? "default-placeholder.png"
+                 }"></span>
+            </div>`;
+    listCartHTML.insertAdjacentHTML("beforeend", newItemHTML);
   });
 
-  listCartHTML.addEventListener("click", (event) => {
-    let positionClick = event.target;
-    if (
-      positionClick.classList.contains("minus") ||
-      positionClick.classList.contains("plus")
-    ) {
-      let product_id = positionClick.parentElement.parentElement.dataset.id;
-      let type = "minus";
-      if (positionClick.classList.contains("plus")) {
-        type = "plus";
-      }
-      changeQuantityCart(product_id, type);
-    }
-  });
-
-  const changeQuantityCart = (product_id, type) => {
-    let positionItemInCart = cart.findIndex(
-      (value) => value.product_id == product_id
-    );
-    if (positionItemInCart >= 0) {
-      let info = cart[positionItemInCart];
-      switch (type) {
-        case "plus":
-          cart[positionItemInCart].quantity =
-            cart[positionItemInCart].quantity + 1;
-          break;
-
-        default:
-          let changeQuantity = cart[positionItemInCart].quantity - 1;
-          if (changeQuantity > 0) {
-            cart[positionItemInCart].quantity = changeQuantity;
-          } else {
-            cart.splice(positionItemInCart, 1);
-          }
-          break;
-      }
-    }
-    addCartToHTML();
-    addCartToMemory();
-  };
-
-  const initApp = async () => {
-
-    let cart;
-
-    fetch(productsJson)
-      .then((response) => response.json())
-      .then((data) => {
-        products = data;
-        addDataToHTML(products);
-
-        if (localStorage.getItem("cart")) {
-          cart = JSON.parse(localStorage.getItem("cart"));
-          addCartToHTML(cart);
-        }
-      })
-      .catch((error) => console.error("Failed to load products:", error));
-  };
-
-  initApp();
+}else{
+  listCartHTML.innerHTML = "<p>Your cart is empty.</p>"; // Show a message when cart is empty 
 }
- 
 
+  if (totalQuantity === 0) {
+    iconCartSpan.classList.add("hidden");
+  } else {
+    iconCartSpan.classList.remove("hidden");
+    iconCartSpan.textContent = totalQuantity.toString();
+  }
+};
+
+listCartHTML.addEventListener("click", (event) => {
+  const type = event.target.classList.contains("plus") ? "plus" : "minus";
+  changeQuantityCart(event.target.closest(".item")?.dataset.id, type);
+});
+
+const changeQuantityCart = (product_id, type) => {
+  const itemIndex = cart.findIndex((value) => value.product_id == product_id);
+  if (itemIndex >= 0) {
+    const item = cart[itemIndex];
+    if (type === "plus") {
+      cart[itemIndex].quantity++;
+    } else if (cart[itemIndex].quantity > 1) {
+      cart[itemIndex].quantity--;
+    } else {
+      cart.splice(itemIndex, 1);
+    }
+
+    updateCartUI();
+    updateLocalStorage();
+  }
+};
+
+const fetchProducts = async () => {
+  try {
+    const response = await fetch(productsJson);
+    products = await response.json();
+    products.forEach(addItemToDom);
+  } catch (error) {
+    console.error("Failed to load products:", error);
+  }
+
+  if (localStorage.getItem("cart")) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+    updateCartUI();
+  }
+};
+
+fetchProducts();
+}
