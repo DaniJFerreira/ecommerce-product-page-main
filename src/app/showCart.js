@@ -71,7 +71,7 @@ const addItemToDom = (product) => {
           <div class="discount">
               <ul class="div-20">
                <li class="div-21">$${product.price}</li>  
-               <li class="div-22">${product.discount_50}%</li>
+               <li class="div-22">50%</li>
               </ul>
              <div class="div-23">$250.00</div>
           </div>
