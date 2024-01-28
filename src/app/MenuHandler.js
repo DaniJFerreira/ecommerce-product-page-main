@@ -1,5 +1,5 @@
 import { Utils } from "./Utils";
-import "../../main.scss";
+import "../main.scss";
 
 export class MenuHandler {
   constructor(querySelectorNavItems, querySelectorHamburger, breakpoint) {

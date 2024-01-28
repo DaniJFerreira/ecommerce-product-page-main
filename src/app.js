@@ -1,7 +1,7 @@
 
-import { MenuHandler } from "./app/utils/MenuHandler";
-import { Gallery } from "../src/app/utils/Gallery";
-import { showCart } from "../src/app/utils/showCart";
+import { MenuHandler } from "./app/MenuHandler";
+import { Gallery } from "./app/Gallery";
+import { showCart } from "./app/showCart";
 import "./main.scss";
 
 // Initialize the MenuHandler with appropriate selectors and breakpoint

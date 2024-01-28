@@ -1,4 +1,9 @@
-import productsJson from "../../../data/products.json";
+import productsJson from "../data/products.json";
+import image from "../assets/image-product-1-thumbnail.jpg";
+import icons from "../assets/icon-addcart.svg";
+import plus from "../assets/icon-plus.svg";
+import minus from "../assets/icon-minus.svg";
+import deleteCart from "../assets/icon-delete.svg";
 
 let listProductHTML = document.querySelector(".div-16");
 let listCartHTML = document.querySelector(".listCart");
@@ -57,20 +62,20 @@ export function showCart() {
                   <div class="div-25">
                     <img
                       loading="lazy"
-                      src="${product.minus}"
+                      src="${minus}"
                       class="minus"
                     />
                     <span>0</span>
                     <img
                       loading="lazy"
-                      src="${product.plus}"
+                      src="${plus}"
                       class="plus"
                     />
                   </div>
                   <button class="addtoCart">
                     <img
                       loading="lazy"
-                      src="${product.cart}"
+                      src="${icons}"
                       class="img-11"
                     />
                     <h1>Add to cart</h1>
@@ -199,7 +204,7 @@ export function showCart() {
                 <div class="item" data-id="${item.product_id}">
                     <div class="image">
                         <img src="${
-                          product.image ?? "default-placeholder.png"
+                          image ?? "default-placeholder.png"
                         }">
                     </div>
                     <div class="name">${product.name}</div>
@@ -212,7 +217,7 @@ export function showCart() {
                     ).toFixed(2)}</p></div>
                  
                         <span class="minus"><img src="${
-                          product.delete ?? "default-placeholder.png"
+                          deleteCart ?? "default-placeholder.png"
                         }"></span>
             
                 </div>`;

@@ -1,4 +1,9 @@
-import imagesJson from "../../../data/gallery.json";
+import imagesJson from "../data/gallery.json";
+import mainImage from "../assets/image-product-1.jpg";
+import imageOne from "../assets/image-product-1.jpg";
+import imageTwo from "../assets/image-product-2.jpg";
+import imageThree from "../assets/image-product-3.jpg";
+import imageFour from "../assets/image-product-4.jpg";
 
 export function Gallery() {
 
