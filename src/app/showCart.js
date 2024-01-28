@@ -1,9 +1,4 @@
 import productsJson from "../data/products.json";
-import image from "../assets/image-product-1-thumbnail.jpg";
-import icons from "../assets/icon-addcart.svg";
-import plus from "../assets/icon-plus.svg";
-import minus from "../assets/icon-minus.svg";
-import deleteCart from "../assets/icon-delete.svg";
 
 // Bundle the asset imports to reduce clutter and improve maintainability
 
@@ -134,10 +129,19 @@ listProductHTML.addEventListener("click", (event) => {
 });
 
 listProductHTML.addEventListener("click", (event) => {
-  const addToCartButton = event.target.closest(".addtoCart");
-  if (addToCartButton) {
-    const productElement = addToCartButton.closest(".item");
-    addToCart(productElement.dataset.id);
+
+  const targetElement = event.target;
+  
+  // Handle adding product to cart
+  if (targetElement.classList.contains("addtoCart") || targetElement.closest(".addtoCart")) {
+    const productElement = targetElement.closest(".item");
+    const productId = productElement.dataset.id;
+    const product = findProductById(productId);
+
+    // Only addToCart if the product's quantity is greater than zero
+    if (product && product.quantity > 0) {
+      addToCart(productId);
+    }
   }
 });
 

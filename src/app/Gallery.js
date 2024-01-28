@@ -1,9 +1,13 @@
 import imagesJson from "../data/gallery.json";
-import mainImage from "../assets/image-product-1.jpg";
-import imageOne from "../assets/image-product-1.jpg";
-import imageTwo from "../assets/image-product-2.jpg";
-import imageThree from "../assets/image-product-3.jpg";
-import imageFour from "../assets/image-product-4.jpg";
+
+const assets = {
+ mainImage : require ( "../assets/image-product-1.jpg" ),
+ imageOne  : require ("../assets/image-product-1.jpg"),
+ imageTwo  : require ("../assets/image-product-2.jpg"),
+ imageThree: require ("../assets/image-product-3.jpg"),
+ imageFour : require ("../assets/image-product-4.jpg")
+};
+
 const imageAnimation = "imgAnim 0.5s ease 0s 1 normal forwards";
 
 export function Gallery() {
