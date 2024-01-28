@@ -1,18 +1,14 @@
-import imageJson from "../../../data/gallery.json";
+import imagesJson from "../../../data/gallery.json";
 
 export function Gallery() {
 
   let currentIndex = null;
-  // let images = imageJson.gallery_prod_01;
   let currentImageElement = null;
+  let images = [];
 
   const galleryElement = document.getElementById("gallery");
   const modal = document.getElementById("modal");
   const featuredImage = document.querySelector(".featured-image");
-
-  let images = Array.isArray(imageJson.gallery_prod_01) ? imageJson.gallery_prod_01 : [];
-
-  console.log(imageJson);
 
   function createGalleryItems(images) {
 
@@ -111,15 +107,29 @@ export function Gallery() {
     .querySelector(".Gnext")
     .addEventListener("click", () => changeImage(1));
 
-  // Close modal if outside click
-  window.onclick = (event) => {
-    if (event.target === modal) {
-      closeModal();
-      // updateImageOpacity(currentImageElement)
-    }
-  };
+  function fetchGalleryData() {
+    fetch(imagesJson) 
+      .then(response =>  response.json())
+      .then(data => {
+        // Assuming your JSON structure has `gallery_prod_01` property as an array
+        images = data.gallery_prod_01;
+        createGalleryItems(images); // Call with the fetched images
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
 
-  createGalleryItems(images);
+  fetchGalleryData();
+  console.log(images);
+
+    // Close modal if outside click
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        closeModal();
+        // updateImageOpacity(currentImageElement)
+      }
+    };
 }
 
 
