@@ -60,7 +60,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: "" } 
           },
           "css-loader", //2. Turns css into commonjs
           "sass-loader" //1. Turns sass into css
@@ -100,6 +99,6 @@ module.exports = {
     port: 3000,
   },
   // This could be 'source-map' or another option to help with debugging.
-  devtool: 'eval-source-map',
+  devtool: false,
 };
 

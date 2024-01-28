@@ -4,6 +4,7 @@ import imageOne from "../assets/image-product-1.jpg";
 import imageTwo from "../assets/image-product-2.jpg";
 import imageThree from "../assets/image-product-3.jpg";
 import imageFour from "../assets/image-product-4.jpg";
+const imageAnimation = "imgAnim 0.5s ease 0s 1 normal forwards";
 
 export function Gallery() {
 
@@ -98,19 +99,44 @@ export function Gallery() {
     displayImageInMain(currentIndex);
   }
 
-  document.querySelector(".close").addEventListener("click", closeModal);
-  document
-    .querySelector(".prev")
-    .addEventListener("click", () => changeImage(-1));
-  document
-    .querySelector(".next")
-    .addEventListener("click", () => changeImage(1));
-  document
-    .querySelector(".Gprev")
-    .addEventListener("click", () => changeImage(-1));
-  document
-    .querySelector(".Gnext")
-    .addEventListener("click", () => changeImage(1));
+  const changeImageWithAnimation = (direction) => {
+    changeImage(direction);
+    featuredImage.style.animation = imageAnimation;
+  };
+  
+  // Event listeners setup
+   document.querySelector(".close").addEventListener("click", closeModal);
+  
+   document.querySelector(".prev").addEventListener("click", () => {
+    changeImageWithAnimation(-1);
+  });
+  
+  document.querySelector(".next").addEventListener("click", () => {
+    changeImageWithAnimation(1);
+  });
+  
+  document.querySelector(".Gprev").addEventListener("click", () => {
+    changeImage(-1); // Assuming no animation desired for gallery previous
+  });
+  
+  document.querySelector(".Gnext").addEventListener("click", () => {
+    changeImage(1); // Assuming no animation desired for gallery next
+  });
+
+
+  // document.querySelector(".close").addEventListener("click", closeModal);
+  // document
+  //   .querySelector(".prev")
+  //   .addEventListener("click", () => changeImage(-1));
+  // document
+  //   .querySelector(".next")
+  //   .addEventListener("click", () => changeImage(1));
+  // document
+  //   .querySelector(".Gprev")
+  //   .addEventListener("click", () => changeImage(-1));
+  // document
+  //   .querySelector(".Gnext")
+  //   .addEventListener("click", () => changeImage(1));
 
   function fetchGalleryData() {
     fetch(imagesJson) 
@@ -136,5 +162,3 @@ export function Gallery() {
       }
     };
 }
-
-

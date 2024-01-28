@@ -4,6 +4,7 @@
       {
         "id": "Main-image",
         "src": "./assets/image-product-1.jpg",
+        "className":"grid-image",
         "alt": "Main Image"
       },
       {

@@ -462,11 +462,32 @@ a {
   margin: 10% auto;
   padding: 20px;
   width: 700px;
+  animation: modalAnim 1s ease 0s 1 normal forwards;
+}
+
+@keyframes modalAnim {
+	0% {
+		transform: translateY(-20%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
 }
 
 .modal-content img {
   width: 600px;
   border-radius: 20px;
+}
+
+@keyframes imgAnim {
+	0% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .modal .featured-image {
