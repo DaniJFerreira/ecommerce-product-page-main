@@ -63,26 +63,26 @@ const addItemToDom = (product) => {
   newProduct.dataset.id = product.id;
   newProduct.classList.add("item");
   newProduct.innerHTML = `
-          <div class="div-17">${product.title}</div>
-          <div class="div-18">${product.name}</div>
-          <div class="div-19">
+          <div class="div-17" role="title" alt="title">${product.title}</div>
+          <div class="div-18" role="name" alt="name">${product.name}</div>
+          <div class="div-19" role="description" alt="product-description">
             ${product.description}
           </div>
-          <div class="discount">
+          <div class="discount" role="discount" alt="discount">
               <ul class="div-20">
                <li class="div-21">$${product.price}</li>  
                <li class="div-22">50%</li>
               </ul>
-             <div class="div-23">$250.00</div>
+             <div class="div-23" role="price" alt="price" >$250.00</div>
           </div>
-          <div class="div-24">
+          <div class="div-24" aria-label="div-25 quantity" role="quantity">
             <div class="div-25">
-              <img src="${assets.minus}" loading="lazy" class="minus" />
+              <img src="${assets.minus}" loading="lazy" class="minus" role="decrease-quantity" alt="decrease quantity" />
               <span>0</span>
-              <img src="${assets.plus}" loading="lazy" class="plus" />
+              <img src="${assets.plus}" loading="lazy" class="plus" role="increase-quantity" alt="increase quantity" />
             </div>
             <button class="addtoCart">
-              <img src="${assets.icons}" loading="lazy" class="img-11" />
+              <img src="${assets.icons}" loading="lazy" class="img-11" role="add-to-cart" alt="add to cart" />
               <h1>Add to cart</h1>
             </button>
             </di>`;

@@ -127,21 +127,6 @@ export function Gallery() {
     changeImage(1); // Assuming no animation desired for gallery next
   });
 
-
-  // document.querySelector(".close").addEventListener("click", closeModal);
-  // document
-  //   .querySelector(".prev")
-  //   .addEventListener("click", () => changeImage(-1));
-  // document
-  //   .querySelector(".next")
-  //   .addEventListener("click", () => changeImage(1));
-  // document
-  //   .querySelector(".Gprev")
-  //   .addEventListener("click", () => changeImage(-1));
-  // document
-  //   .querySelector(".Gnext")
-  //   .addEventListener("click", () => changeImage(1));
-
   function fetchGalleryData() {
     fetch(imagesJson) 
       .then(response =>  response.json())
