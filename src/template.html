@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
   <script src="https://kit.fontawesome.com/ff38e5c58a.js" crossorigin="anonymous"></script>
   <title>Frontend Mentor | E-commerce product page</title>
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-      <button class="hamburger hamburger--collapse hidden" type="button" aria-label="Menu">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>
-      <img loading="lazy" src="./assets/logo.svg" class="imglogo" alt="Company Logo" />
-      <ul class="navitems" data-visible="false" role="menu">
-        <li class="div-5"><a href="#" role="menuitem">Collections</a></li>
-        <li class="div-6"><a href="#" role="menuitem">Men</a></li>
-        <li class="div-7"><a href="#" role="menuitem">Women</a></li>
-        <li class="div-8"><a href="#" role="menuitem">About</a></li>
-        <li class="div-9"><a href="#" role="menuitem">Contact</a></li>
-      </ul>
-      <div class="icon-cart">
-        <img loading="lazy" src="./assets/icon-cart.svg" class="img-2" alt="View Cart" />
-        <span>0</span>
-        <img loading="lazy" src="./assets/image-avatar.png" class="img-3" alt="User Avatar">
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <section id="cartTab" class="hidden" aria-labelledby="cart-heading">
-      <h3 id="cart-heading">Cart</h3>
-      <hr>
-      <div class="listCart">
-        <!-- ... -->
-      </div>
-      <div class="btn">
-        <button class="checkOut">
-          Checkout
+</head>
+
+<body>
+  <div class="div">
+    <div class="div-2">
+      <nav class="navbar">
+        <button class="hamburger hamburger--collapse hidden" type="button" aria-label="Menu">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
         </button>
-      </div>
-    </section>
-    
-    <section class="product-display" aria-labelledby="gallery-header">
-      <div class="column">
-        <div class="div-14">
-          <h2 id="gallery-header" class="visually-hidden">Product Gallery</h2>
-          <div id="gallery" class="grid-gallery">
-            <button class="Gprev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="Gnext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
-            <!-- Place gallery images here with appropriate alt text -->
-          </div>
+      <img loading="lazy" src="./assets/logo.svg" class="imglogo" alt="Company Logo" />
+        <ul class="navitems" data-visible="false" role="manu">
+          <li class="div-5"><a href="#">Collections</a></li>
+          <li class="div-6"><a href="#">Men</a></li>
+          <li class="div-7"><a href="#">Women</a></li>
+          <li class="div-8"><a href="#">About</a></li>
+          <li class="div-9"><a href="#">Contact</a></li>
+        </ul>
+        <div class="icon-cart">
+          <img loading="lazy" src="./assets/icon-cart.svg" class="img-2" alt="View Cart"/>
+          <span>0</span>
+          <img loading="lazy" src="./assets/image-avatar.png" class="img-3" alt="View Avatar">
         </div>
-        <div id="modal" class="modal" role="dialog" aria-labelledby="featured-image-label">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <img class="featured-image" alt="Featured Product Image">
-            <div class="carousel-buttons">
-              <button class="prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
-              <button class="next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+      </nav>
+      <div id="cartTab" class="hidden">
+        <h3>Cart</h3>
+        <hr>
+        <div class="listCart">
+        </div>
+        <div class="btn">
+          <button class="checkOut">
+            Check Out
+          </button>
+        </div>
+      </div>
+      <div class="div-11" aria-labelledby="gallery-header"></div>
+      <!-- <div class="div-12"> -->
+      <div class="div-13">
+        <div class="column">
+          <div class="div-14">
+            <section id="gallery" class="grid-gallery" alt="gallery">
+              <div class="gallery-button">
+                <button class="Gprev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="Gnext"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </section>
+            <div id="modal" class="modal" role="dialog" aria-labelledby="featured-image-label">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <img class="featured-image" alt="featured Product Image ">
+                <div class="carousel-buttons">
+                  <button class="prev"><i class="fa-solid fa-chevron-left"></i></button>
+                  <button class="next"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="column-2" aria-labelledby="details-header">
+          <div class="div-16"></div>
+        </div>
       </div>
-      <div class="column-2">
-        <!-- Additional content here -->
-      </div>
-    </section>
-  </main>
+    </div>
+  </div>
+  <!-- </div> -->
+  </div>
+  </div>
+
 </body>
+
 </html>
