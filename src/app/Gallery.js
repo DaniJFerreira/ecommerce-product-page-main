@@ -23,12 +23,10 @@ export function Gallery() {
   function createGalleryItems(images) {
 
     images.forEach((image, index) => {
-      let wrapperElm = document.createElement("div");
       let imgElem = document.createElement("img");
       imgElem.id = image.id;
       imgElem.src = image.src;
       imgElem.alt = image.alt;
-      wrapperElm.className = image.className;
       imgElem.setAttribute("data-index", index);
 
       imgElem.addEventListener("click", function () {
@@ -39,8 +37,6 @@ export function Gallery() {
         }
         updateImageOpacity(imgElem);
       }); 
-
-            wrapperElm.appendChild(imgElem);
      
       galleryElement.appendChild(imgElem);
     });

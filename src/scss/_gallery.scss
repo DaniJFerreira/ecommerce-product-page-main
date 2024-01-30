@@ -1,0 +1,147 @@
+@mixin flexCenter(){
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+  }
+
+.grid-gallery {
+    display: grid;
+    width: auto;
+    // height: 650px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // grid-template-rows: repeat(3, 500px); /* Simplified notation for three equal rows */
+    grid-template-columns: repeat(4, 1fr);
+    /* Simplified notation for four equal columns */
+    grid-template-areas:
+      "Main-image Main-image Main-image Main-image"
+      "Image-one Image-two Image-three Image-four";
+    gap: 30px;
+    /* Uncommented and fixed syntax */
+  }
+  
+  .gallery-button {
+    visibility: hidden;
+  }
+  
+  .grid-gallery img {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  /* Individual image container styling */
+  #Main-image {
+    grid-area: Main-image;
+  }
+  
+  #Image-one {
+    grid-area: Image-one;
+  }
+  
+  #Image-two {
+    grid-area: Image-two;
+  }
+  
+  #Image-three {
+    grid-area: Image-three;
+  }
+  
+  #Image-four {
+    grid-area: Image-four;
+  }
+  
+  .grid-image{
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+    &:hover img{
+      opacity: 70%;
+      overflow: hidden;
+    }
+  }
+  
+  /* Modal styling remains unchanged */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal-content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 10% auto;
+    padding: 20px;
+    width: 700px;
+    animation: modalAnim 1s ease 0s 1 normal forwards;
+  }
+  
+  @keyframes modalAnim {
+      0% {
+          transform: translateY(-20%);
+      }
+  
+      100% {
+          transform: translateY(0);
+      }
+  }
+  
+  .modal-content img {
+    width: 600px;
+    border-radius: 20px;
+  }
+  
+  @keyframes imgAnim {
+      0% {
+          background-position: 100% 50%;
+      }
+  
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+  
+  .modal .featured-image {
+    width: 100%;
+  }
+  
+  .carousel-buttons {
+    @include flexCenter;
+    align-self: center;
+    position: absolute;
+    text-align: center;
+    gap: 530px;
+  }
+  
+  .carousel-buttons button {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close {
+    width: 30px;
+    position: absolute;
+    top: -55px;
+    left: 650px;
+    color: $primary-white;
+    font-size: 50px;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: #ff7e1b;
+  }
