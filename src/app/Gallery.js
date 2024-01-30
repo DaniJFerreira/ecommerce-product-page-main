@@ -27,6 +27,7 @@ export function Gallery() {
       imgElem.id = image.id;
       imgElem.src = image.src;
       imgElem.alt = image.alt;
+      imgElem.className = image.className;
       imgElem.setAttribute("data-index", index);
 
       imgElem.addEventListener("click", function () {
@@ -43,10 +44,9 @@ export function Gallery() {
   }
 
   function displayImageInMain(index) {
-    const { name, src, alt,  className } = images[index];
+    const { src, alt,  className } = images[index];
     let mainImageElement = document.getElementById("Main-image");
     if (mainImageElement) {
-      mainImageElement.name = name;
       mainImageElement.src = src;
       mainImageElement.alt = alt;
       mainImageElement.className = className;
