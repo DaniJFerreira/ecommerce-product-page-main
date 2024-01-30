@@ -18,7 +18,12 @@ export class MenuHandler {
       hamburger.addEventListener("click", (event) => {
         this.toggleMenu(event);
         this.navbar.forEach((navItem) => {
-          navItem.classList.toggle("navbar-slide-out"); // Toggle the 'navbar-slide-out' class
+          if (this.isToggleActive) {
+            navItem.classList.add("navbar-slide-out");
+          } else {
+            navItem.classList.add("navbar-slide-in");
+            navItem.classList.remove("navbar-slide-out");
+          }
         });
       }); // Handle the menu toggle
     });

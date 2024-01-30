@@ -23,71 +23,79 @@ export function Gallery() {
   function createGalleryItems(images) {
 
     images.forEach((image, index) => {
+      let wrapperElm = document.createElement("div");
       let imgElem = document.createElement("img");
+      imgElem.id = image.id;
       imgElem.src = image.src;
-      imgElem.id = image.id.trim();
       imgElem.alt = image.alt;
-      imgElem.className = `${image.className} grid-image`;
+      wrapperElm.className = image.className;
       imgElem.setAttribute("data-index", index);
 
       imgElem.addEventListener("click", function () {
         if (imgElem.id === "Main-image") {
           openModal(index);
         } else {
-          displayImageInMain(index);
+          displayImageInMain(index);;
         }
         updateImageOpacity(imgElem);
-      });
+      }); 
+
+            wrapperElm.appendChild(imgElem);
      
       galleryElement.appendChild(imgElem);
     });
   }
 
   function displayImageInMain(index) {
-    const { src, alt, class: className } = images[index];
+    const { name, src, alt,  className } = images[index];
     let mainImageElement = document.getElementById("Main-image");
     if (mainImageElement) {
+      mainImageElement.name = name;
       mainImageElement.src = src;
       mainImageElement.alt = alt;
-      mainImageElement.class = className;
+      mainImageElement.className = className;
       // updateImageOpacity(mainImageElement);
     }
   }
 
   function openModal(index) {
+
     if (
       index >= 0 &&
-      index < images.length &&
-      images[index].id === "Main-image"
+      index < images.length
     ) {
+    // Make sure that we do not open the modal for the main image or index 0
       currentIndex = index;
-      updateModalImage();
+      updateModalImage(); // Assuming this function sets the correct image in the modal
       modal.style.display = "block";
-    }
-    window;
   }
-
+  window
+}
+  
   function closeModal() {
     modal.style.display = "none";
+    let currentImageElement = null;
 
     if (currentImageElement) {
       currentImageElement.style.opacity = "";
-      currentImageElement.style.border = "none";
+      currentImageElement.parentElement.style.border = "none";
     }
   }
 
   function updateImageOpacity(newImageElement) {
-    if (currentImageElement) {
+    // Reset styles on the previous selected image wrapper
+    if ( currentImageElement) {
       currentImageElement.style.opacity = "";
       currentImageElement.style.border = "none";
     }
-    newImageElement.style.opacity = "0.5";
-    newImageElement.style.border = "2px solid #ff7e1b";
-    currentImageElement = newImageElement;
+          // Update styles on the new selected image wrapper
+       newImageElement.style.opacity = "0.5";
+       newImageElement.style.border = "2px solid #ff7e1b";
+       currentImageElement = newImageElement;
   }
 
   function updateModalImage() {
-    const { src, alt, class: className } = images[currentIndex];
+    const { src, alt, className } = images[currentIndex];
     featuredImage.src = src;
     featuredImage.alt = alt;
     featuredImage.className = className;
@@ -97,8 +105,16 @@ export function Gallery() {
     updateImageOpacity(newSelectedImgElem);
   }
 
+
   function changeImage(step) {
     currentIndex = (currentIndex + step + images.length) % images.length;
+
+    if (step < 0 && currentIndex === 0) {
+      currentIndex = images.length - 1;
+    } else if (step > 0 && currentIndex === 0) {
+      currentIndex = 1;
+    }
+
     updateModalImage();
     displayImageInMain(currentIndex);
   }
@@ -151,3 +167,4 @@ export function Gallery() {
       }
     };
 }
+

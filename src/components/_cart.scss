@@ -1,0 +1,109 @@
+#cartTab h3 {
+    font-weight: bold;
+    color: $primary-black;
+  }
+  
+  #cartTab button {
+    @include flexCenter;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: $primary-white;
+    cursor: pointer;
+    border-style: none;
+    background-color: $primary-orange;
+    gap: 16px;
+  }
+  
+  .checkOut:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .checkOut:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .listCart p {
+    font-weight: bold;
+  }
+  
+  .listCart .item img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .listCart .item {
+    display: grid;
+    // grid-template-columns: 70px 150px 50px 1fr;
+    grid-template-columns: repeat(1, 60px 60px 15px 110px 15px);
+    grid-template-areas:
+      "image name name name minus"
+      "image price quantity totalPrice minus";
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .image {
+    grid-area: image;
+  }
+  
+  .name {
+    grid-area: name;
+  }
+  
+  .price {
+    grid-area: price;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .quantity {
+    grid-area: quantity;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .minus {
+    grid-area: minus;
+  }
+  
+  .totaPrice {
+    grid-area: totalPrice;
+    font-weight: bold !important;
+    color: $primary-black;
+  }
+  
+  .item .totaPrice {
+    font-weight: bold !important;
+    color: $primary-black;
+  }
+  
+  .listCart .quantity span {
+    display: inline-block;
+    width: 25px;
+    cursor: pointer;
+  }
+  
+  .listCart .quantity span:nth-child(2) {
+    background-color: transparent;
+    color: $primary-darkgrey;
+    font-weight: bold;
+    cursor: auto;
+  }
+  
+  .listCart .item:nth-child(even) {
+    background-color: #eee1;
+  }
+  
+  .listCart {
+    overflow: auto;
+  }
+  
+  .listCart::-webkit-scrollbar {
+    width: 0;
+  }
