@@ -21,27 +21,27 @@ export function Gallery() {
   const featuredImage = document.querySelector(".featured-image");
 
   function createGalleryItems(images) {
-
+    
     images.forEach((image, index) => {
-      let imgElem = document.createElement("img");
-      imgElem.id = image.id;
-      imgElem.src = image.src;
-      imgElem.alt = image.alt;
-      imgElem.className = image.className;
-      imgElem.setAttribute("data-index", index);
+        let imgElem = document.createElement('img');
+        imgElem.src = image.src;
+        imgElem.id = image.id.trim();
+        imgElem.alt = image.alt;
+        imgElem.className = `${image.className} grid-image`;
+        imgElem.setAttribute('data-index', index);
+        galleryElement.appendChild(imgElem);
 
-      imgElem.addEventListener("click", function () {
-        if (imgElem.id === "Main-image") {
-          openModal(index);
-        } else {
-          displayImageInMain(index);;
-        }
-        updateImageOpacity(imgElem);
-      }); 
-     
-      galleryElement.appendChild(imgElem);
+        imgElem.addEventListener('click', function(){
+            if(imgElem.id === 'Main-image'){
+            openModal(index);
+          }else{
+              displayImageInMain(index);
+          }
+          updateImageOpacity(imgElem);
+        });
+        
     });
-  }
+}
 
   function displayImageInMain(index) {
     const { src, alt,  className } = images[index];
