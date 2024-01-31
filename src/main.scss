@@ -1,8 +1,5 @@
-@import './scss/reset';
-@import './scss/variables';
-@import './scss/hamburger';
-@import './scss/navbar';
-@import './scss/cart';
+@use './scss/reset';
+@use './scss/variables';
 
 @mixin flexCenter(){
   display: flex;
@@ -13,10 +10,10 @@
 
 // Set up the body
 body {
-  font-family: $ff-KumbhSans;
-  font-size: $fs-400;
-  color:$primary-white;
-  background-color: $primary-white; 
+  font-family: variables.$ff-KumbhSans;
+  font-size: variables.$fs-400;
+  color:variables.$primary-white;
+  background-color: variables.$primary-white; 
   line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
@@ -24,12 +21,220 @@ body {
 
 .div {
  @include flexCenter;
-  background-color: $primary-white;
+  background-color: variables.$primary-white;
   padding: 28px 60px 50px;
   flex-direction: column;
 }
 
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 
+.navitems {
+  display: flex;
+  overflow: hidden;
+  height: 70px;
+  position: absolute;
+  margin-left: 150px;
+  gap: 20px;
+}
+
+li {
+  justify-content: center;
+  width: 80px;
+  overflow: hidden;
+}
+
+ul li a {
+  list-style-type: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: variables.$grey-light;
+}
+
+a {
+  list-style-type: none;
+  text-decoration: none;
+  color: variables.$grey-light;
+
+  &:hover {
+    color: variables.$primary-grey;
+  }
+}
+
+.navitems li:hover {
+  border-bottom: 5px solid variables.$primary-orange;
+}
+
+
+.imglogo {
+aspect-ratio: 6.9;
+display: flex;
+object-fit: contain;
+object-position: center;
+width: 150px;
+align-self: start;
+margin: auto 0;
+}
+
+.icon-cart .img-2 {
+align-items: center;
+object-fit: contain;
+object-position: center;
+width: 22px;
+overflow: hidden;
+cursor: pointer;
+margin: auto 0;
+}
+
+.icon-cart {
+display: flex;
+gap: 30px;
+}
+
+.icon-cart span {
+background-color: variables.$primary-orange;
+border-radius: 100%;
+position: absolute;
+font-size: 10px;
+height: 15px;
+padding: 1px 5px;
+margin: 5px 10px;
+}
+
+.img-3 {
+aspect-ratio: 1;
+object-fit: contain;
+object-position: center;
+align-self: center;
+width: 50px;
+overflow: hidden;
+border-radius: 50%;
+align-self: stretch;
+cursor: pointer;
+}
+
+.img-3:hover {
+border: 3px solid variables.$primary-orange;
+transition: 0.5ms ease-in-out 0.5ms;
+transform: scale(55px);
+}
+
+.hamburger {
+  position: absolute;
+  padding: 15px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+
+  &:hover,
+  &.is-active:hover {
+    opacity: 0.7;
+  }
+
+  &.is-active {
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      background-color: variables.$primary-black;
+    }
+  }
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  width: 30px;
+  height: 4px;
+  display: block;
+  background-color: variables.$primary-black;
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: variables.$primary-black;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+  }
+
+  &::before {
+    top: -10px;
+  }
+
+  &::after {
+    bottom: -10px;
+  }
+}
+
+.hamburger--collapse {
+  .hamburger-inner {
+    top: auto;
+    bottom: 0;
+    transition-duration: 0.13s;
+    transition-delay: 0.13s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    &::after {
+      top: -20px;
+      transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+        opacity 0.1s linear;
+    }
+
+    &::before {
+      transition: top 0.12s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .hamburger-inner {
+      transform: translate3d(0, -10px, 0) rotate(-45deg);
+      transition-delay: 0.22s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &::after {
+        top: 0;
+        opacity: 0;
+        transition: top 0.2s 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333),
+          opacity 0.1s 0.22s linear;
+      }
+
+      &::before {
+        top: 0;
+        transform: rotate(-90deg);
+        transition: top 0.1s 0.16s cubic-bezier(0.33333, 0, 0.66667, 0.33333),
+          transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
+  }
+}
 .grid-gallery {
   display: grid;
   width: auto;
@@ -162,13 +367,13 @@ body {
   position: absolute;
   top: -55px;
   left: 650px;
-  color: $primary-white;
+  color: variables.$primary-white;
   font-size: 50px;
   cursor: pointer;
 }
 
 .close:hover {
-  color: #ff7e1b;
+  color: variables.$primary-orange;
 }
 
 .overlay {
@@ -188,7 +393,7 @@ body {
   font-size: 25px;
 
   &:hover {
-    color: #ff7e1b;
+    color: variables.$primary-orange;
   }
 }
 
@@ -200,8 +405,8 @@ body {
   display: flex ;
   list-style: none;
   text-decoration: none;
-  color: $primary-grey;
-  font: 400 15px/173% $ff-KumbhSans;
+  color: variables.$primary-grey;
+  font: 400 15px/173% variables.$ff-KumbhSans;
 }
 
 .div-10 {
@@ -217,8 +422,8 @@ body {
   height: auto;
   padding: 20px;
   align-self: flex-end;
-  background-color: $primary-white;
-  color: $primary-grey;
+  background-color: variables.$primary-white;
+  color: variables.$primary-grey;
   position: fixed;
   display: block;
   border-radius: 10px;
@@ -253,13 +458,13 @@ body {
   object-fit: contain;
   object-position: center;
   width: 19px;
-  color: $primary-white;
+  color: variables.$primary-white;
   overflow: hidden;
   max-width: 100%;
 }
 
 .div-11 {
-  background-color: $blue-white;
+  background-color: variables.$blue-white;
   align-self: stretch;
   display: flex;
   margin-top: 34px;
@@ -317,25 +522,25 @@ body {
 }
 
 .div-17 {
-  color: $primary-orange;
+  color: variables.$primary-orange;
   letter-spacing: 2px;
   text-transform: uppercase;
   align-self: stretch;
-  font: 700 13px $ff-KumbhSans;
+  font: 700 13px variables.$ff-KumbhSans;
 }
 
 .div-18 {
-  color: $primary-darkgrey;
+  color: variables.$primary-darkgrey;
   align-self: stretch;
   margin-top: 32px;
-  font: 700 44px/48px $ff-KumbhSans;
+  font: 700 44px/48px variables.$ff-KumbhSans;
 }
 
 .div-19 {
-  color: $primary-grey;
+  color: variables.$primary-grey;
   align-self: stretch;
   margin-top: 49px;
-  font: 400 16px/26px $ff-KumbhSans;
+  font: 400 16px/26px variables.$ff-KumbhSans;
 }
 
 .div-20 {
@@ -358,27 +563,27 @@ body {
   width: auto;
   padding: 2px;
   align-items: center;
-  color: $primary-darkgrey;
-  font: 700 28px $ff-roboto;
+  color: variables.$primary-darkgrey;
+  font: 700 28px variables.$ff-roboto;
 }
 
 .div-22 {
   width: 50px;
-  color: $primary-orange;
+  color: variables.$primary-orange;
   white-space: nowrap;
   border-radius: 6px;
-  background-color: $orange-white;
+  background-color: variables.$orange-white;
   aspect-ratio: 1.8888888888888888;
   justify-content: center;
   padding: 3px;
-  font: 700 16px $ff-KumbhSans;
+  font: 700 16px variables.$ff-KumbhSans;
 }
 
 .div-23 {
-  color: $grey-light;
+  color: variables.$grey-light;
   text-decoration-line: line-through;
   margin-top: 15px;
-  font: 700 16px/162.5% $ff-KumbhSans;
+  font: 700 16px/162.5% variables.$ff-KumbhSans;
 }
 
 .div-24 {
@@ -389,8 +594,8 @@ body {
 
 .div-25 {
   border-radius: 10px;
-  background-color: $blue-white;
-  color: $primary-black;
+  background-color: variables.$blue-white;
+  color: variables.$primary-black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -419,10 +624,128 @@ body {
 }
 
 .div-26 {
-  color: $primary-darkgrey;
+  color: variables.$primary-darkgrey;
   text-align: center;
-  font: 700 16px $ff-KumbhSans;
+  font: 700 16px variables.$ff-KumbhSans;
 }
+
+
+@mixin flexCenter(){
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+}
+
+#cartTab h3 {
+    font-weight: bold;
+    color: variables.$primary-black;
+  }
+  
+  #cartTab button {
+    @include flexCenter;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: variables.$primary-white;
+    cursor: pointer;
+    border-style: none;
+    background-color: variables.$primary-orange;
+    gap: 16px;
+  }
+  
+  .checkOut:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .checkOut:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .listCart p {
+    font-weight: bold;
+  }
+  
+  .listCart .item img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .listCart .item {
+    display: grid;
+    // grid-template-columns: 70px 150px 50px 1fr;
+    grid-template-columns: repeat(1, 60px 60px 15px 110px 15px);
+    grid-template-areas:
+      "image name name name minus"
+      "image price quantity totalPrice minus";
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .image {
+    grid-area: image;
+  }
+  
+  .name {
+    grid-area: name;
+  }
+  
+  .price {
+    grid-area: price;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .quantity {
+    grid-area: quantity;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .minus {
+    grid-area: minus;
+  }
+  
+  .totaPrice {
+    grid-area: totalPrice;
+    font-weight: bold !important;
+    color: variables.$primary-black;
+  }
+  
+  .item .totaPrice {
+    font-weight: bold !important;
+    color: variables.$primary-black;
+  }
+  
+  .listCart .quantity span {
+    display: inline-block;
+    width: 25px;
+    cursor: pointer;
+  }
+  
+  .listCart .quantity span:nth-child(2) {
+    background-color: transparent;
+    color: variables.$primary-darkgrey;
+    font-weight: bold;
+    cursor: auto;
+  }
+  
+  .listCart .item:nth-child(even) {
+    background-color: variables.$primary-darkgrey;
+  }
+  
+  .listCart {
+    overflow: auto;
+  }
+  
+  .listCart::-webkit-scrollbar {
+    width: 0;
+  }
 
 .addtoCart {
   @include flexCenter;
@@ -431,12 +754,12 @@ body {
   border-radius: 10px;
   cursor: pointer;
   border-style: none;
-  background-color: $primary-orange;
+  background-color: variables.$primary-orange;
   gap: 16px;
 }
 
 .addtoCart:hover {
-  box-shadow: 0px 20px 50px -20px $primary-orange;
+  box-shadow: 0px 20px 50px -20px variables.$primary-orange;
   opacity: 70%;
 }
 
@@ -451,8 +774,8 @@ body {
 }
 
 h1 {
-  color: $primary-white;
-  font: 700 16px $ff-KumbhSans;
+  color: variables.$primary-white;
+  font: 700 16px variables.$ff-KumbhSans;
 }
 
 .hidden {
@@ -483,7 +806,7 @@ h1 {
     padding: 15px;
     position: fixed;
     height: 80px;
-    background-color: $primary-white;
+    background-color: variables.$primary-white;
     box-shadow: -1px 0px 5px 0px #2c2c2c;
   }
 
@@ -496,7 +819,7 @@ h1 {
     left: 0;
     width: 250px;
     height: 1000px;
-    background-color: $primary-white;
+    background-color: variables.$primary-white;
     display: block;
     -webkit-box-shadow: 6px 0px 15px -9px #000000;
     box-shadow: 6px 0px 12px -9px #353535;

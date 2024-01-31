@@ -90,14 +90,14 @@ const addItemToDom = (product) => {
 };
 
 const addToCart = (productId) => {
-  const product = findProductById(productId);
-  if (!product || product.quantity < 1) {
+  let product = findProductById(productId);
+  if (product.quantity < 1) {
     console.error("Cannot add to cart: Product is undefined or quantity is less than 1");
     return;
   }
 
   let cartItem = cart.find((item) => item.product_id === productId);
-  if (cartItem) {
+  if (cartItem ) {
     cartItem.quantity += product.quantity;
   } else {
     cart.push({ product_id: productId, quantity: product.quantity });
@@ -106,21 +106,27 @@ const addToCart = (productId) => {
   product.quantity = 1;
   updateCartUI();
   updateLocalStorage();
+
+  let productElement = listProductHTML.querySelector(`.item[data-id="${productId}"]`);
+  if (productElement) {
+      let quantityElement = productElement.querySelector('.div-25 span');
+      quantityElement.textContent = '1';
+  }
 };
 
 listProductHTML.addEventListener("click", (event) => {
-  const targetElement = event.target;
+  let targetElement = event.target;
   if (targetElement.classList.contains("plus") || targetElement.classList.contains("minus")) {
-    const productElement = targetElement.closest(".item");
-    const productId = productElement.dataset.id;
-    const product = findProductById(productId);
-    const quantityElement = productElement.querySelector(".div-25 span");
-    let currentQuantity = parseInt(quantityElement.textContent, 10);
+    let productElement = targetElement.closest(".item");
+    let productId = productElement.dataset.id;
+    let product = findProductById(productId);
+    let quantityElement = productElement.querySelector(".div-25 span");
+    let currentQuantity = parseInt(quantityElement.textContent, 0);
 
     if (targetElement.classList.contains("plus")) {
-      currentQuantity++;
-    } else if (currentQuantity > 1) { 
-      currentQuantity--;
+      currentQuantity+=1;
+    } else if (currentQuantity > 1 && targetElement.classList.contains('minus')) { 
+      currentQuantity-=1;
     }
 
     updateQuantityDisplay(quantityElement, currentQuantity);
@@ -203,9 +209,9 @@ listCartHTML.addEventListener("click", (event) => {
 });
 
 const changeQuantityCart = (product_id, type) => {
-  const itemIndex = cart.findIndex((value) => value.product_id == product_id);
+  let itemIndex = cart.findIndex((value) => value.product_id == product_id);
   if (itemIndex >= 0) {
-    const item = cart[itemIndex];
+    let item = cart[itemIndex];
     if (type === "plus") {
       cart[itemIndex].quantity++;
     } else if (cart[itemIndex].quantity > 1) {
