@@ -55,7 +55,6 @@ export function Gallery() {
   }
 
   function openModal(index) {
-
     if (
       index >= 0 &&
       index < images.length
@@ -70,11 +69,10 @@ export function Gallery() {
   
   function closeModal() {
     modal.style.display = "none";
-    let currentImageElement = null;
 
     if (currentImageElement) {
       currentImageElement.style.opacity = "";
-      currentImageElement.parentElement.style.border = "none";
+      currentImageElement.style.border = "none";
     }
   }
 
@@ -99,7 +97,6 @@ export function Gallery() {
       `[data-index="${currentIndex}"]`
     );
     updateImageOpacity(newSelectedImgElem);
-    console.log();
   }
 
   function changeImage(step) {
@@ -113,8 +110,6 @@ export function Gallery() {
 
     updateModalImage();
     displayImageInMain(currentIndex);
-
-    console.log();
   }
 
   const changeImageWithAnimation = (direction) => {
@@ -163,7 +158,7 @@ export function Gallery() {
     window.onclick = (event) => {
       if (event.target === modal) {
         closeModal();
-        // updateImageOpacity(currentImageElement)
+        updateImageOpacity(currentImageElement)
       }
     };
 }
