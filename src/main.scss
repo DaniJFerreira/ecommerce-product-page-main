@@ -1,3 +1,5 @@
+@use './scss/reset';
+@use './scss/variables';
 
 @mixin flexCenter(){
   display: flex;
@@ -6,92 +8,12 @@
   align-items: center;
 }
 
-/* ------------------- */
-/* Custom properties   */
-/* ------------------- */
-
-// Define color, font-size and font-family 
-$primary-black: #000;
-$primary-white: #fff;
-$primary-orange: #ff7e1b;
-$orange-white: #ffeee2;
-$primary-darkgrey: #1d2026;
-$primary-grey: #69707d;
-$grey-light: #b6bcc8;
-$blue-white: #e4e9f2;
-
-$fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
-$fs-800: 3.5rem;
-$fs-700: 1.5rem;
-$fs-600: 1rem;
-$fs-500: 1rem;
-$fs-400: 0.9375rem;
-$fs-300: 1rem;
-$fs-200: 0.875rem;
-
-$ff-serif: "Bellefair", serif;
-$ff-sans-cond: "Barlow Condensed", sans-serif;
-$ff-sans-normal: "Barlow", sans-serif;
-$ff-KumbhSans: "Kumbh Sans", sans-serif;
-$ff-roboto: "Roboto", Helvetica;
-$ff-apple-system: "apple-system", Helvetica;
-
-/* Reset styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-figure,
-picture {
-  margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-weight: 400;
-}
-
-/* make form elements easier to work with */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* remove animations for people who've turned them off */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-
 // Set up the body
 body {
-  font-family: $ff-KumbhSans;
-  font-size: $fs-400;
-  color:$primary-white;
-  background-color: $primary-white; 
+  font-family: variables.$ff-KumbhSans;
+  font-size: variables.$fs-400;
+  color:variables.$primary-white;
+  background-color: variables.$primary-white; 
   line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
@@ -99,7 +21,7 @@ body {
 
 .div {
  @include flexCenter;
-  background-color: $primary-white;
+  background-color: variables.$primary-white;
   padding: 28px 60px 50px;
   flex-direction: column;
 }
@@ -129,21 +51,21 @@ ul li a {
   list-style-type: none;
   text-decoration: none;
   cursor: pointer;
-  color: $grey-light;
+  color: variables.$grey-light;
 }
 
 a {
   list-style-type: none;
   text-decoration: none;
-  color: $grey-light;
+  color: variables.$grey-light;
 
   &:hover {
-    color: $primary-grey;
+    color: variables.$primary-grey;
   }
 }
 
 .navitems li:hover {
-  border-bottom: 5px solid $primary-orange;
+  border-bottom: 5px solid variables.$primary-orange;
 }
 
 
@@ -173,7 +95,7 @@ gap: 30px;
 }
 
 .icon-cart span {
-background-color: $primary-orange;
+background-color: variables.$primary-orange;
 border-radius: 100%;
 position: absolute;
 font-size: 10px;
@@ -195,7 +117,7 @@ cursor: pointer;
 }
 
 .img-3:hover {
-border: 3px solid $primary-orange;
+border: 3px solid variables.$primary-orange;
 transition: 0.5ms ease-in-out 0.5ms;
 transform: scale(55px);
 }
@@ -225,7 +147,7 @@ transform: scale(55px);
     .hamburger-inner,
     .hamburger-inner::before,
     .hamburger-inner::after {
-      background-color: $primary-black;
+      background-color: variables.$primary-black;
     }
   }
 }
@@ -241,7 +163,7 @@ transform: scale(55px);
   width: 30px;
   height: 4px;
   display: block;
-  background-color: $primary-black;
+  background-color: variables.$primary-black;
   border-radius: 4px;
   position: absolute;
   transition-property: transform;
@@ -254,7 +176,7 @@ transform: scale(55px);
     display: block;
     width: 30px;
     height: 4px;
-    background-color: $primary-black;
+    background-color: variables.$primary-black;
     border-radius: 4px;
     position: absolute;
     transition-property: transform;
@@ -445,13 +367,13 @@ transform: scale(55px);
   position: absolute;
   top: -55px;
   left: 650px;
-  color: $primary-white;
+  color: variables.$primary-white;
   font-size: 50px;
   cursor: pointer;
 }
 
 .close:hover {
-  color: $primary-orange;
+  color: variables.$primary-orange;
 }
 
 .overlay {
@@ -471,7 +393,7 @@ transform: scale(55px);
   font-size: 25px;
 
   &:hover {
-    color: $primary-orange;
+    color: variables.$primary-orange;
   }
 }
 
@@ -483,8 +405,8 @@ transform: scale(55px);
   display: flex ;
   list-style: none;
   text-decoration: none;
-  color: $primary-grey;
-  font: 400 15px/173% $ff-KumbhSans;
+  color: variables.$primary-grey;
+  font: 400 15px/173% variables.$ff-KumbhSans;
 }
 
 .div-10 {
@@ -500,8 +422,8 @@ transform: scale(55px);
   height: auto;
   padding: 20px;
   align-self: flex-end;
-  background-color: $primary-white;
-  color: $primary-grey;
+  background-color: variables.$primary-white;
+  color: variables.$primary-grey;
   position: fixed;
   display: block;
   border-radius: 10px;
@@ -536,13 +458,13 @@ transform: scale(55px);
   object-fit: contain;
   object-position: center;
   width: 19px;
-  color: $primary-white;
+  color: variables.$primary-white;
   overflow: hidden;
   max-width: 100%;
 }
 
 .div-11 {
-  background-color: $blue-white;
+  background-color: variables.$blue-white;
   align-self: stretch;
   display: flex;
   margin-top: 34px;
@@ -600,25 +522,25 @@ transform: scale(55px);
 }
 
 .div-17 {
-  color: $primary-orange;
+  color: variables.$primary-orange;
   letter-spacing: 2px;
   text-transform: uppercase;
   align-self: stretch;
-  font: 700 13px $ff-KumbhSans;
+  font: 700 13px variables.$ff-KumbhSans;
 }
 
 .div-18 {
-  color: $primary-darkgrey;
+  color: variables.$primary-darkgrey;
   align-self: stretch;
   margin-top: 32px;
-  font: 700 44px/48px $ff-KumbhSans;
+  font: 700 44px/48px variables.$ff-KumbhSans;
 }
 
 .div-19 {
-  color: $primary-grey;
+  color: variables.$primary-grey;
   align-self: stretch;
   margin-top: 49px;
-  font: 400 16px/26px $ff-KumbhSans;
+  font: 400 16px/26px variables.$ff-KumbhSans;
 }
 
 .div-20 {
@@ -641,27 +563,27 @@ transform: scale(55px);
   width: auto;
   padding: 2px;
   align-items: center;
-  color: $primary-darkgrey;
-  font: 700 28px $ff-roboto;
+  color: variables.$primary-darkgrey;
+  font: 700 28px variables.$ff-roboto;
 }
 
 .div-22 {
   width: 50px;
-  color: $primary-orange;
+  color: variables.$primary-orange;
   white-space: nowrap;
   border-radius: 6px;
-  background-color: $orange-white;
+  background-color: variables.$orange-white;
   aspect-ratio: 1.8888888888888888;
   justify-content: center;
   padding: 3px;
-  font: 700 16px $ff-KumbhSans;
+  font: 700 16px variables.$ff-KumbhSans;
 }
 
 .div-23 {
-  color: $grey-light;
+  color: variables.$grey-light;
   text-decoration-line: line-through;
   margin-top: 15px;
-  font: 700 16px/162.5% $ff-KumbhSans;
+  font: 700 16px/162.5% variables.$ff-KumbhSans;
 }
 
 .div-24 {
@@ -672,8 +594,8 @@ transform: scale(55px);
 
 .div-25 {
   border-radius: 10px;
-  background-color: $blue-white;
-  color: $primary-black;
+  background-color: variables.$blue-white;
+  color: variables.$primary-black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -702,9 +624,9 @@ transform: scale(55px);
 }
 
 .div-26 {
-  color: $primary-darkgrey;
+  color: variables.$primary-darkgrey;
   text-align: center;
-  font: 700 16px $ff-KumbhSans;
+  font: 700 16px variables.$ff-KumbhSans;
 }
 
 
@@ -717,7 +639,7 @@ transform: scale(55px);
 
 #cartTab h3 {
     font-weight: bold;
-    color: $primary-black;
+    color: variables.$primary-black;
   }
   
   #cartTab button {
@@ -727,10 +649,10 @@ transform: scale(55px);
     margin-top: 10px;
     border-radius: 10px;
     font-weight: bold;
-    color: $primary-white;
+    color: variables.$primary-white;
     cursor: pointer;
     border-style: none;
-    background-color: $primary-orange;
+    background-color: variables.$primary-orange;
     gap: 16px;
   }
   
@@ -792,12 +714,12 @@ transform: scale(55px);
   .totaPrice {
     grid-area: totalPrice;
     font-weight: bold !important;
-    color: $primary-black;
+    color: variables.$primary-black;
   }
   
   .item .totaPrice {
     font-weight: bold !important;
-    color: $primary-black;
+    color: variables.$primary-black;
   }
   
   .listCart .quantity span {
@@ -808,13 +730,13 @@ transform: scale(55px);
   
   .listCart .quantity span:nth-child(2) {
     background-color: transparent;
-    color: $primary-darkgrey;
+    color: variables.$primary-darkgrey;
     font-weight: bold;
     cursor: auto;
   }
   
   .listCart .item:nth-child(even) {
-    background-color: $primary-darkgrey;
+    background-color: variables.$primary-darkgrey;
   }
   
   .listCart {
@@ -832,12 +754,12 @@ transform: scale(55px);
   border-radius: 10px;
   cursor: pointer;
   border-style: none;
-  background-color: $primary-orange;
+  background-color: variables.$primary-orange;
   gap: 16px;
 }
 
 .addtoCart:hover {
-  box-shadow: 0px 20px 50px -20px $primary-orange;
+  box-shadow: 0px 20px 50px -20px variables.$primary-orange;
   opacity: 70%;
 }
 
@@ -852,8 +774,8 @@ transform: scale(55px);
 }
 
 h1 {
-  color: $primary-white;
-  font: 700 16px $ff-KumbhSans;
+  color: variables.$primary-white;
+  font: 700 16px variables.$ff-KumbhSans;
 }
 
 .hidden {
@@ -884,7 +806,7 @@ h1 {
     padding: 15px;
     position: fixed;
     height: 80px;
-    background-color: $primary-white;
+    background-color: variables.$primary-white;
     box-shadow: -1px 0px 5px 0px #2c2c2c;
   }
 
@@ -897,7 +819,7 @@ h1 {
     left: 0;
     width: 250px;
     height: 1000px;
-    background-color: $primary-white;
+    background-color: variables.$primary-white;
     display: block;
     -webkit-box-shadow: 6px 0px 15px -9px #000000;
     box-shadow: 6px 0px 12px -9px #353535;
