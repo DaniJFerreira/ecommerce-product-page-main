@@ -26,6 +26,17 @@ body {
   flex-direction: column;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+  width: 100%;
+  max-width: 1110px;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 .navbar {
   display: flex;
   width: 100%;
@@ -91,7 +102,7 @@ margin: auto 0;
 
 .icon-cart {
 display: flex;
-gap: 30px;
+gap: 40px;
 }
 
 .icon-cart span {
@@ -257,7 +268,7 @@ transform: scale(55px);
 }
 
 .grid-gallery img {
-  border-radius: 20px;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -351,12 +362,12 @@ transform: scale(55px);
   align-self: center;
   position: absolute;
   text-align: center;
-  gap: 530px;
+  gap: 545px;
 }
 
-.carousel-buttons button {
-  width: 70px;
-  height: 70px;
+.carousel-buttons button {  
+  width: 56px;
+  height: 56px;
   border-radius: 100%;
   border: none;
   cursor: pointer;
@@ -378,15 +389,6 @@ transform: scale(55px);
 
 .overlay {
   visibility: hidden;
-}
-
-.div-2 {
-  display: flex;
-  margin-bottom: 54px;
-  width: 100%;
-  max-width: 1110px;
-  flex-direction: column;
-  align-items: center;
 }
 
 .fa-solid {
@@ -479,16 +481,16 @@ transform: scale(55px);
 }
 
 .div-13 {
-  gap: 20px;
+  gap: 40px;
   display: flex;
-  padding: 80px 0px 0px 40px;
+  padding: 70px;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   line-height: normal;
-  width: 51%;
+  width: 100%;
   margin-left: 0px;
 }
 
@@ -506,19 +508,19 @@ transform: scale(55px);
   gap: 20px;
 }
 
-.column-2 {
+.column-2 , .item {
   display: flex;
   flex-direction: column;
   line-height: normal;
-  width: 49%;
-  margin-left: 20px;
+  width: 100%;
+  margin-left: 0;
 }
 
 .div-16 {
   display: flex;
   flex-direction: column;
-  margin: auto 0;
-  padding: 0px 20px 0px 80px;
+  margin: 50px 0;
+  padding: 0px 0px 0px 40px;
 }
 
 .div-17 {
@@ -526,21 +528,27 @@ transform: scale(55px);
   letter-spacing: 2px;
   text-transform: uppercase;
   align-self: stretch;
-  font: 700 13px variables.$ff-KumbhSans;
+  font-weight: variables.$fs-bold;
+  font-size: 13px;
+  font-family: variables.$ff-KumbhSans;
 }
 
 .div-18 {
   color: variables.$primary-darkgrey;
   align-self: stretch;
-  margin-top: 32px;
-  font: 700 44px/48px variables.$ff-KumbhSans;
+  margin-top: 25px;
+  font-size: 44px;
+  font-weight: variables.$fs-bold;
+  font-family: variables.$ff-KumbhSans;
 }
 
 .div-19 {
   color: variables.$primary-grey;
   align-self: stretch;
-  margin-top: 49px;
-  font: 400 16px/26px variables.$ff-KumbhSans;
+  margin-top: 25px;
+  font-weight: variables.$fs-400;
+  font-size: 16px;
+  font-family: variables.$ff-KumbhSans;
 }
 
 .div-20 {
@@ -562,6 +570,7 @@ transform: scale(55px);
 .div-21 {
   width: auto;
   padding: 2px;
+  font-size: 28px;
   align-items: center;
   color: variables.$primary-darkgrey;
   font: 700 28px variables.$ff-roboto;
@@ -580,9 +589,10 @@ transform: scale(55px);
 }
 
 .div-23 {
+  font-size: 16px;
   color: variables.$grey-light;
   text-decoration-line: line-through;
-  margin-top: 15px;
+  margin-top: 10px;
   font: 700 16px/162.5% variables.$ff-KumbhSans;
 }
 
@@ -600,7 +610,7 @@ transform: scale(55px);
   align-items: center;
   justify-content: space-between;
   padding: 22px 20px;
-  width: 70%;
+  width: 40%;
   height: 55px;
 }
 
@@ -804,6 +814,7 @@ h1 {
   .navbar {
     z-index: 2;
     padding: 15px;
+    top: 0;
     position: fixed;
     height: 80px;
     background-color: variables.$primary-white;
@@ -940,8 +951,8 @@ h1 {
   }
 
   .gallery-button button {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     border: none;
     cursor: pointer;
@@ -997,18 +1008,23 @@ h1 {
     margin-top: 40px;
   }
 
+  .div-18{
+    font-size: 28px;
+  }
+
   .div-16 {
     padding: 20px;
   }
 
-  .column,
-  .column-2 {
+  .column {
     width: 100%;
     margin-left: 0;
   }
 
   .column-2 {
     position: relative;
+    width: 100%;
+    margin-left: 0;
   }
 
   .div-14,
