@@ -29,17 +29,17 @@ export function Gallery() {
         imgElem.alt = image.alt;
         imgElem.className = `${image.className} grid-image`;
         imgElem.setAttribute('data-index', index);
-        galleryElement.appendChild(imgElem);
+      
 
         imgElem.addEventListener('click', function(){
             if(imgElem.id === 'Main-image'){
             openModal(index);
           }else{
               displayImageInMain(index);
-          }
+          } 
           updateImageOpacity(imgElem);
         });
-        
+        galleryElement.appendChild(imgElem);
     });
 }
 
@@ -99,8 +99,8 @@ export function Gallery() {
       `[data-index="${currentIndex}"]`
     );
     updateImageOpacity(newSelectedImgElem);
+    console.log();
   }
-
 
   function changeImage(step) {
     currentIndex = (currentIndex + step + images.length) % images.length;
@@ -113,6 +113,8 @@ export function Gallery() {
 
     updateModalImage();
     displayImageInMain(currentIndex);
+
+    console.log();
   }
 
   const changeImageWithAnimation = (direction) => {
@@ -150,10 +152,12 @@ export function Gallery() {
       .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
       });
+
+      console.log(imagesJson);
   }
 
   fetchGalleryData();
-  console.log(images);
+  console.log(imagesJson);
 
     // Close modal if outside click
     window.onclick = (event) => {
