@@ -58,7 +58,6 @@ export function Gallery() {
     if (
       index >= 0 &&
       index < images.length
-      && images[index].id === "Main-image"
     ) {
     // Make sure that we do not open the modal for the main image or index 0
       currentIndex = index;
@@ -100,20 +99,15 @@ export function Gallery() {
     updateImageOpacity(newSelectedImgElem);
   }
 
-  // function changeImage(step) {
-  //   currentIndex = (currentIndex + step + images.length) % images.length;
-
-  //   if (step < 0 && currentIndex === 0) {
-  //     currentIndex = images.length - 1;
-  //   } else if (step > 0 && currentIndex === 0) {
-  //     currentIndex = 1;
-  //   }
-
-  //   updateModalImage();
-  //   displayImageInMain(currentIndex);
-  // }
   function changeImage(step) {
     currentIndex = (currentIndex + step + images.length) % images.length;
+
+    if (step < 0 && currentIndex === 0) {
+      currentIndex = images.length - 1;
+    } else if (step > 0 && currentIndex === 0) {
+      currentIndex = 1;
+    }
+
     updateModalImage();
     displayImageInMain(currentIndex);
   }
@@ -158,44 +152,6 @@ export function Gallery() {
   }
 
   fetchGalleryData();
-
-  // async function fetchGalleryData() {
-  //   try {
-  //     // Replace 'YOUR_JSON_ENDPOINT' with the actual endpoint from which you are fetching data
-  //     const response = await fetch(imagesJson);
-  //     const data = await response.json();
-      
-  //     // Safely access 'gallery_prod_01' with optional chaining; default to empty array if undefined
-  //     images = data?.gallery_prod_01 || [];
-      
-  //     // Now 'images' is guaranteed to be an array and safe for 'forEach' usage inside 'createGalleryItems'
-  //     createGalleryItems(images);
-  //   } catch (error) {
-  //     console.error('There has been a problem with your fetch operation:', error);
-  //   }
-  // }
-
-  // async function fetchGalleryData() {
-  //   try {
-  //     // If imagesJson is a URL endpoint, rather than a local JSON file,
-  //     // Make sure it is correctly defined.
-  //     const response = await fetch(imagesJson);
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     images = data?.gallery_prod_01 || [];
-  //     createGalleryItems(images);
-  //   } catch (error) {
-  //     console.error('There has been a problem with your fetch operation:', error);
-  //     // Display an error message or indicator to the user
-  //     // Optionally, allow the user to attempt to reload the gallery manually
-  //   }
-  // }
-  
-  // document.addEventListener('DOMContentLoaded', (event) => {
-  //   fetchGalleryData();
-  // });
 
   console.log(imagesJson);
 

@@ -15,9 +15,9 @@ export class MenuHandler {
     window.dispatchEvent(new Event("resize"));
 
     Utils.forEach(this.hamburgers, (hamburger) => {
-      hamburger.addEventListener("click", function (event) {
+      hamburger.addEventListener("click", (event) =>{
         this.toggleMenu(event);
-        this.navbar.forEach(function (navItem){
+        this.navbar.forEach( (navItem) =>{
           if (this.isToggleActive) {
             navItem.classList.add("navbar-slide-out");
           } else {

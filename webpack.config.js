@@ -99,6 +99,6 @@ module.exports = {
     port: 3000,
   },
   // This could be 'source-map' or another option to help with debugging.
-  devtool: false,
+  devtool: 'eval',
 };
 
