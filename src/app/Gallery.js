@@ -44,13 +44,13 @@ export function Gallery() {
 }
 
   function displayImageInMain(index) {
-    const { src, alt,  className } = images[index];
+    const { src, alt,  class: className } = images[index];
     let mainImageElement = document.getElementById("Main-image");
     if (mainImageElement) {
       mainImageElement.src = src;
       mainImageElement.alt = alt;
-      mainImageElement.className = className;
-      // updateImageOpacity(mainImageElement);
+      mainImageElement.class = className;
+      //updateImageOpacity(mainImageElement);
     }
   }
 
@@ -58,13 +58,14 @@ export function Gallery() {
     if (
       index >= 0 &&
       index < images.length
+      && images[index].id === "Main-image"
     ) {
     // Make sure that we do not open the modal for the main image or index 0
       currentIndex = index;
       updateModalImage(); // Assuming this function sets the correct image in the modal
       modal.style.display = "block";
   }
-  window
+  window;
 }
   
   function closeModal() {
@@ -99,15 +100,20 @@ export function Gallery() {
     updateImageOpacity(newSelectedImgElem);
   }
 
+  // function changeImage(step) {
+  //   currentIndex = (currentIndex + step + images.length) % images.length;
+
+  //   if (step < 0 && currentIndex === 0) {
+  //     currentIndex = images.length - 1;
+  //   } else if (step > 0 && currentIndex === 0) {
+  //     currentIndex = 1;
+  //   }
+
+  //   updateModalImage();
+  //   displayImageInMain(currentIndex);
+  // }
   function changeImage(step) {
     currentIndex = (currentIndex + step + images.length) % images.length;
-
-    if (step < 0 && currentIndex === 0) {
-      currentIndex = images.length - 1;
-    } else if (step > 0 && currentIndex === 0) {
-      currentIndex = 1;
-    }
-
     updateModalImage();
     displayImageInMain(currentIndex);
   }
