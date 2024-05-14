@@ -2,7 +2,7 @@
 
 .navbar {
     display: flex;
-    width: 100vw;
+    width: 100%;
     justify-content: space-between;
   }
   
@@ -235,4 +235,9 @@
   .icon-cart{
     gap: 20px;
   }
+
+  .navbar {
+    width: 100vw;
+  }
+
   }
