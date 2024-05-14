@@ -33,12 +33,11 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 54px;
-  width: 100%;
+  width: 100vw;
   max-width: 1110px;
   flex-direction: column;
   align-items: center;
 }
-
 
 .overlay {
   visibility: hidden;
@@ -257,6 +256,7 @@ h1 {
 }
 
 @media (max-width: 991px) {
+
   body,
   html {
     padding: 0;
@@ -291,21 +291,19 @@ h1 {
     margin: -20px 0px;
     position: absolute;
     overflow: hidden;
-    left: 0;
+    left: -250px;
     width: 250px;
     height: 1000px;
     background-color: variables.$primary-white;
     display: block;
     -webkit-box-shadow: 6px 0px 15px -9px #000000;
     box-shadow: 6px 0px 12px -9px #353535;
-  }
+    transform: translateX(0px);
+    transition: transform .3s ease-in-out ;
 
-  .navbar-slide-in {
-    animation: slideIn 500ms ease-in-out 0s ;
-  }
-
-  .navbar-slide-out {
-    animation: slideOut 500ms ease-in-out 0s ;
+    &.open{
+      transform: translateX(250px); // Assuming the navbar slides in
+    }
   }
 
   li {
@@ -316,9 +314,6 @@ h1 {
     font-weight: bold;
   }
 
-  .is-active {
-    transform: translateX(0); // Assuming the navbar slides in
-  }
 
   #cartTab {
     margin: -15px 20px;

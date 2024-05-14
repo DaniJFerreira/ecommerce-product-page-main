@@ -50,7 +50,7 @@ const handleClickOnPage = debounce((event) => {
 
 window.addEventListener("click", handleClickOnPage);
 
-// Added functions to better organize code
+
 const findProductById = (id) =>
   products.find((product) => product.id.toString() === id.toString());
 

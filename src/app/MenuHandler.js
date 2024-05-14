@@ -19,10 +19,9 @@ export class MenuHandler {
         this.toggleMenu(event);
         this.navbar.forEach( (navItem) =>{
           if (this.isToggleActive) {
-            navItem.classList.add("navbar-slide-out");
+            navItem.classList.toggle("open");
           } else {
-            navItem.classList.add("navbar-slide-in");
-            navItem.classList.remove("navbar-slide-out");
+            navItem.classList.toggle("open");
           }
         });
       }); // Handle the menu toggle

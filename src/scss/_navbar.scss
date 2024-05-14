@@ -2,7 +2,7 @@
 
 .navbar {
     display: flex;
-    width: 100%;
+    width: 100vw;
     justify-content: space-between;
   }
   
@@ -228,4 +228,11 @@
     100% {
       transform: translateX(0px);
     }
+  }
+
+  @media (max-width: 991px){
+    
+  .icon-cart{
+    gap: 20px;
+  }
   }
