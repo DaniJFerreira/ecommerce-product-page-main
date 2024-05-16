@@ -258,7 +258,18 @@ h1 {
 @media (max-width: 991px) {
 
   body,
-  html {
+  html,
+  .container {
+    padding: 0;
+    margin: 0;
+  }
+
+  .container{
+    padding:  0;
+    margin: 0;
+  }
+
+  .div{
     padding: 0;
     margin: 0;
   }
@@ -341,7 +352,8 @@ h1 {
   }
 
   .imglogo {
-    margin: auto 70px;
+    margin: auto 0px auto 70px;
+    width: 120px;
   }
 
   .discount {
@@ -349,7 +361,7 @@ h1 {
     justify-content: space-between;
     padding: 0;
     margin: 0;
-    gap: 110px;
+    // gap: 110px;
   }
 
   .grid-gallery {
@@ -443,7 +455,7 @@ h1 {
 
   .div-16,
   .div-19 {
-    max-width: 100%;
+    max-width: 100vw;
     margin-top: 40px;
   }
 
